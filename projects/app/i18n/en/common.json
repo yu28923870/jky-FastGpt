@@ -580,8 +580,7 @@
             "success": "Start syncing"
           }
         },
-        "training": {
-        }
+        "training": {}
       },
       "data": {
         "Auxiliary Data": "Auxiliary data",
@@ -1533,6 +1532,9 @@
     "Update password failed": "Failed to update password",
     "Update password successful": "Password updated successfully",
     "Usage Record": "Usage record",
+    "Logs Manager": "Logs Manager",
+    "Logs Time": "Logs Time",
+    "Logs Export": "Logs Export",
     "apikey": {
       "key": "API key"
     },

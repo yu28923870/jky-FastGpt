@@ -11,11 +11,13 @@ import {
   Tbody,
   useTheme,
   useDisclosure,
-  ModalBody
+  ModalBody,
+  Button,
+  Card
 } from '@chakra-ui/react';
 import MyIcon from '@fastgpt/web/components/common/Icon';
 import { useTranslation } from 'next-i18next';
-import { getAppChatLogs } from '@/web/core/app/api';
+import { exportAppChatLogs, getAppChatLogs } from '@/web/core/app/api';
 import dayjs from 'dayjs';
 import { ChatSourceMap } from '@fastgpt/global/core/chat/constants';
 import { HUMAN_ICON } from '@fastgpt/global/common/system/constants';
@@ -34,6 +36,9 @@ import DateRangePicker, { DateRangeType } from '@fastgpt/web/components/common/D
 import { formatChatValue2InputType } from '@/components/ChatBox/utils';
 import { getNanoid } from '@fastgpt/global/common/string/tools';
 import { useI18n } from '@/web/context/I18n';
+import { exportExcel } from '@/service/utils/log/exportExcel';
+import { useToast } from '@fastgpt/web/hooks/useToast';
+import { GetChatLogsParams } from '@/global/core/api/appReq';
 
 const Logs = ({ appId }: { appId: string }) => {
   const { t } = useTranslation();
@@ -70,6 +75,8 @@ const Logs = ({ appId }: { appId: string }) => {
 
   const [detailLogsId, setDetailLogsId] = useState<string>();
 
+  const { toast } = useToast();
+
   return (
     <Flex flexDirection={'column'} h={'100%'} pt={[1, 5]} position={'relative'}>
       <Box px={[4, 8]}>
@@ -78,11 +85,11 @@ const Logs = ({ appId }: { appId: string }) => {
             <Box fontWeight={'bold'} fontSize={['md', 'xl']} mb={2}>
               {appT('Chat logs')}
             </Box>
-            <Box color={'myGray.500'} fontSize={'sm'}>
+            <Box color={'myGray.500'} fontSize={'sm'} mb={1}>
               {appT('Chat Logs Tips')},{' '}
               <Box
                 as={'span'}
-                mr={2}
+                mr={5}
                 textDecoration={'underline'}
                 cursor={'pointer'}
                 onClick={onOpenMarkDesc}
@@ -90,6 +97,41 @@ const Logs = ({ appId }: { appId: string }) => {
                 {t('core.chat.Read Mark Description')}
               </Box>
             </Box>
+            <Flex alignItems={'center'} w={['85%', '550px']}>
+              <Box flex={'0 0 80px'}>{t('user.Logs Time')}:&nbsp;</Box>
+              <Box flex={'0 0 200px'}>
+                <DateRangePicker
+                  defaultDate={dateRange}
+                  position="bottom"
+                  onChange={setDateRange}
+                />
+              </Box>
+              <Box flex={'0 0 30px'}></Box>
+              <Button
+                size={'sm'}
+                variant={'whitePrimary'}
+                onClick={async () => {
+                  const params: GetChatLogsParams = {
+                    appId: appId,
+                    dateStart: dateRange.from || new Date(),
+                    dateEnd: addDays(dateRange.to || new Date(), 1)
+                  };
+                  const datas = await exportAppChatLogs(params);
+                  // @ts-ignore
+                  if (datas.length == 0) {
+                    toast({
+                      status: 'warning',
+                      title: '无日志'
+                    });
+                  } else {
+                    // @ts-ignore
+                    exportExcel(datas, datas[0].appName + '的日志');
+                  }
+                }}
+              >
+                {appT('Logs Export')}
+              </Button>
+            </Flex>
           </>
         )}
       </Box>
