@@ -580,8 +580,7 @@
             "success": "开始同步"
           }
         },
-        "training": {
-        }
+        "training": {}
       },
       "data": {
         "Auxiliary Data": "辅助数据",
@@ -1538,6 +1537,9 @@
     "Update password failed": "修改密码异常",
     "Update password successful": "修改密码成功",
     "Usage Record": "使用记录",
+    "Logs Manager": "日志管理",
+    "Logs Time": "日期范围",
+    "Logs Export": "日志导出",
     "apikey": {
       "key": "API 秘钥"
     },

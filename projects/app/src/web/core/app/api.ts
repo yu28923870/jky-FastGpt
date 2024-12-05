@@ -1,6 +1,10 @@
 import { GET, POST, DELETE, PUT } from '@/web/common/api/request';
 import type { AppDetailType, AppListItemType } from '@fastgpt/global/core/app/type.d';
-import type { GetAppChatLogsParams } from '@/global/core/api/appReq.d';
+import type {
+  GetAppChatLogsParams,
+  GetAllChatLogsParams,
+  GetChatLogsParams
+} from '@/global/core/api/appReq.d';
 import { AppUpdateParams, CreateAppParams } from '@/global/core/app/api';
 
 /**
@@ -32,3 +36,9 @@ export const putAppById = (id: string, data: AppUpdateParams) =>
 
 // =================== chat logs
 export const getAppChatLogs = (data: GetAppChatLogsParams) => POST(`/core/app/getChatLogs`, data);
+
+export const exportAppChatLogs = (data: GetChatLogsParams) =>
+  POST(`/core/app/exportChatLogs`, data);
+
+export const exportAllChatLogs = (data: GetAllChatLogsParams) =>
+  POST(`/core/app/exportAllChatLogs`, data);

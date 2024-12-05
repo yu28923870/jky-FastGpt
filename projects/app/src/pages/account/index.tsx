@@ -19,6 +19,7 @@ const BillTable = dynamic(() => import('./components/BillTable'));
 const InformTable = dynamic(() => import('./components/InformTable'));
 const ApiKeyTable = dynamic(() => import('./components/ApiKeyTable'));
 const Individuation = dynamic(() => import('./components/Individuation'));
+const LogsManage = dynamic(() => import('./components/LogsManage'));
 
 enum TabEnum {
   'info' = 'info',
@@ -28,6 +29,7 @@ enum TabEnum {
   'inform' = 'inform',
   'individuation' = 'individuation',
   'apikey' = 'apikey',
+  'logs' = 'logs',
   'loginout' = 'loginout'
 }
 
@@ -42,40 +44,49 @@ const Account = ({ currentTab }: { currentTab: `${TabEnum}` }) => {
       label: t('user.Personal Information'),
       id: TabEnum.info
     },
-    ...(feConfigs?.isPlus
+    //...(feConfigs?.isPlus
+    //  ? [
+    //    {
+    //      icon: 'support/usage/usageRecordLight',
+    //      label: t('user.Usage Record'),
+    //      id: TabEnum.usage
+    //    }
+    //  ]
+    //  : []),
+    //...(feConfigs?.show_pay && userInfo?.team.canWrite
+    //  ? [
+    //    {
+    //      icon: 'support/bill/payRecordLight',
+    //      label: t('support.wallet.Bills'),
+    //      id: TabEnum.bill
+    //    }
+    //  ]
+    //  : []),
+    //
+    //...(feConfigs?.show_promotion
+    //  ? [
+    //    {
+    //      icon: 'support/account/promotionLight',
+    //      label: t('user.Promotion Record'),
+    //      id: TabEnum.promotion
+    //    }
+    //  ]
+    //  : []),
+    //...(userInfo?.team.canWrite
+    //  ? [
+    //    {
+    //      icon: 'support/outlink/apikeyLight',
+    //      label: t('user.apikey.key'),
+    //      id: TabEnum.apikey
+    //    }
+    //  ]
+    //  : []),
+    ...(feConfigs.isPlus
       ? [
           {
             icon: 'support/usage/usageRecordLight',
-            label: t('user.Usage Record'),
-            id: TabEnum.usage
-          }
-        ]
-      : []),
-    ...(feConfigs?.show_pay && userInfo?.team.canWrite
-      ? [
-          {
-            icon: 'support/bill/payRecordLight',
-            label: t('support.wallet.Bills'),
-            id: TabEnum.bill
-          }
-        ]
-      : []),
-
-    ...(feConfigs?.show_promotion
-      ? [
-          {
-            icon: 'support/account/promotionLight',
-            label: t('user.Promotion Record'),
-            id: TabEnum.promotion
-          }
-        ]
-      : []),
-    ...(userInfo?.team.canWrite
-      ? [
-          {
-            icon: 'support/outlink/apikeyLight',
-            label: t('user.apikey.key'),
-            id: TabEnum.apikey
+            label: t('user.Logs Manager'),
+            id: TabEnum.logs
           }
         ]
       : []),
@@ -84,16 +95,15 @@ const Account = ({ currentTab }: { currentTab: `${TabEnum}` }) => {
       label: t('support.account.Individuation'),
       id: TabEnum.individuation
     },
-    ...(feConfigs.isPlus
-      ? [
-          {
-            icon: 'support/user/informLight',
-            label: t('user.Notice'),
-            id: TabEnum.inform
-          }
-        ]
-      : []),
-
+    //...(feConfigs.isPlus
+    //  ? [
+    //    {
+    //      icon: 'support/user/informLight',
+    //      label: t('user.Notice'),
+    //      id: TabEnum.inform
+    //    }
+    //  ]
+    //  : []),
     {
       icon: 'support/account/loginoutLight',
       label: t('user.Sign Out'),
@@ -178,6 +188,7 @@ const Account = ({ currentTab }: { currentTab: `${TabEnum}` }) => {
             {currentTab === TabEnum.individuation && <Individuation />}
             {currentTab === TabEnum.inform && <InformTable />}
             {currentTab === TabEnum.apikey && <ApiKeyTable />}
+            {currentTab === TabEnum.logs && <LogsManage />}
           </Box>
         </Flex>
         <ConfirmModal />
