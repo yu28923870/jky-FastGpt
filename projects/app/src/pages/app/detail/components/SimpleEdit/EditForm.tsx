@@ -30,6 +30,7 @@ import { TTSTypeEnum } from '@/constants/app';
 import { getSystemVariables } from '@/web/core/app/utils';
 import { useUpdate } from 'ahooks';
 import { useI18n } from '@/web/context/I18n';
+import LDSwitch from '@/components/core/app/LogDetail';
 
 const DatasetSelectModal = dynamic(() => import('@/components/core/app/DatasetSelectModal'));
 const DatasetParamsModal = dynamic(() => import('@/components/core/app/DatasetParamsModal'));
@@ -111,6 +112,7 @@ const EditForm = ({
   const tts = getValues('userGuide.tts');
   const whisperConfig = getValues('userGuide.whisper');
   const postQuestionGuide = getValues('userGuide.questionGuide');
+  const logDetail = getValues('userGuide.logDetail');
   const selectedTools = watch('selectedTools');
 
   const selectDatasets = useMemo(
@@ -435,12 +437,23 @@ const EditForm = ({
           </Box>
 
           {/* question guide */}
-          <Box {...BoxStyles} borderBottom={'none'}>
+          <Box {...BoxStyles}>
             <QGSwitch
               isChecked={postQuestionGuide}
               size={'lg'}
               onChange={(e) => {
                 setValue('userGuide.questionGuide', e.target.checked);
+              }}
+            />
+          </Box>
+
+          {/* log detail */}
+          <Box {...BoxStyles} borderBottom={'none'}>
+            <LDSwitch
+              isChecked={logDetail}
+              size={'lg'}
+              onChange={(e) => {
+                setValue('userGuide.logDetail', e.target.checked);
               }}
             />
           </Box>

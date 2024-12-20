@@ -81,7 +81,7 @@ const Account = ({ currentTab }: { currentTab: `${TabEnum}` }) => {
     //    }
     //  ]
     //  : []),
-    ...(feConfigs.isPlus
+    ...(userInfo?.username == 'root'
       ? [
           {
             icon: 'support/usage/usageRecordLight',

@@ -49,6 +49,13 @@ export const appTemplates: (AppItemType & {
             value: false
           },
           {
+            key: 'logDetail',
+            valueType: WorkflowIOValueTypeEnum.boolean,
+            renderTypeList: [FlowNodeInputTypeEnum.hidden],
+            label: 'core.app.Log Detail',
+            value: true
+          },
+          {
             key: 'tts',
             renderTypeList: [FlowNodeInputTypeEnum.hidden],
             valueType: WorkflowIOValueTypeEnum.any,
@@ -293,6 +300,13 @@ export const appTemplates: (AppItemType & {
             value: false
           },
           {
+            key: 'logDetail',
+            valueType: WorkflowIOValueTypeEnum.boolean,
+            renderTypeList: [FlowNodeInputTypeEnum.hidden],
+            label: 'core.app.Log Detail',
+            value: true
+          },
+          {
             key: 'tts',
             renderTypeList: [FlowNodeInputTypeEnum.hidden],
             valueType: WorkflowIOValueTypeEnum.any,
@@ -518,6 +532,13 @@ export const appTemplates: (AppItemType & {
             renderTypeList: [FlowNodeInputTypeEnum.hidden],
             label: 'core.app.Question Guide',
             value: false
+          },
+          {
+            key: 'logDetail',
+            valueType: WorkflowIOValueTypeEnum.boolean,
+            renderTypeList: [FlowNodeInputTypeEnum.hidden],
+            label: 'core.app.Log Detail',
+            value: true
           },
           {
             key: 'tts',
@@ -841,6 +862,13 @@ export const appTemplates: (AppItemType & {
             valueType: WorkflowIOValueTypeEnum.boolean,
             renderTypeList: [FlowNodeInputTypeEnum.hidden],
             label: 'core.app.Question Guide',
+            value: true
+          },
+          {
+            key: 'logDetail',
+            valueType: WorkflowIOValueTypeEnum.boolean,
+            renderTypeList: [FlowNodeInputTypeEnum.hidden],
+            label: 'core.app.Log Detail',
             value: true
           },
           {

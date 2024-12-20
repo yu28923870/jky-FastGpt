@@ -63,6 +63,12 @@ export function form2AppWorkflow(data: AppSimpleEditFormType): WorkflowType {
           renderTypeList: [FlowNodeInputTypeEnum.hidden],
           label: '',
           value: formData.userGuide.scheduleTrigger
+        },
+        {
+          key: NodeInputKeyEnum.logDetail,
+          renderTypeList: [FlowNodeInputTypeEnum.hidden],
+          label: '',
+          value: formData.userGuide.logDetail
         }
       ],
       outputs: []

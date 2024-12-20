@@ -51,7 +51,7 @@ async function handler(
       userName: user!.username,
       role: chatItems[i].obj,
       time: chatItems[i].time,
-      content: chatItems[i].value[0].text!.content,
+      content: chatItems[i].value[0]?.text.content || '',
       // @ts-ignore
       userGoodFeedback: chatItems[i].userGoodFeedback,
       // @ts-ignore

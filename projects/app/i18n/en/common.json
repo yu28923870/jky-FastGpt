@@ -224,6 +224,7 @@
       "Interval timer config": "Scheduled execution configuration",
       "Interval timer run": "Scheduled execution",
       "Interval timer tip": "Can be scheduled to execute applications",
+      "Log Detail": "Log Detail",
       "Make a brief introduction of your app": "Give your AI app an introduction",
       "Max histories": "Chat history count",
       "Max tokens": "Reply limit",

@@ -55,6 +55,12 @@ export const SystemConfigNode: FlowNodeTemplateType = {
       renderTypeList: [FlowNodeInputTypeEnum.hidden],
       valueType: WorkflowIOValueTypeEnum.any,
       label: ''
+    },
+    {
+      key: NodeInputKeyEnum.logDetail,
+      valueType: WorkflowIOValueTypeEnum.boolean,
+      renderTypeList: [FlowNodeInputTypeEnum.hidden],
+      label: ''
     }
   ],
   outputs: []
