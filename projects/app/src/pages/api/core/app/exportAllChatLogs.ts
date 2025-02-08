@@ -8,17 +8,22 @@ import { ExportAppLogsListItemType } from '@/types/log';
 import { MongoTeam } from '@fastgpt/service/support/user/team/teamSchema';
 import { addDays } from 'date-fns';
 import { GetAllChatLogsParams } from '@/global/core/api/appReq';
+import { Types } from '@fastgpt/service/common/mongo';
 
 async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<ExportAppLogsListItemType[]> {
-  const { dateStart = addDays(new Date(), -7), dateEnd = new Date() } =
-    req.body as GetAllChatLogsParams;
+  const {
+    teamId,
+    dateStart = addDays(new Date(), -7),
+    dateEnd = new Date()
+  } = req.body as GetAllChatLogsParams;
 
   const datas: ExportAppLogsListItemType[] = [];
 
   const where = {
+    teamId: new Types.ObjectId(teamId),
     time: {
       $gte: new Date(dateStart),
       $lte: new Date(dateEnd)

@@ -13,6 +13,7 @@ export type GetChatLogsParams = {
 };
 
 export type GetAllChatLogsParams = {
+  teamId: string;
   dateStart: Date;
   dateEnd: Date;
 };

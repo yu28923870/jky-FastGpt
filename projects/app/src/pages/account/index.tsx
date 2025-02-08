@@ -72,24 +72,21 @@ const Account = ({ currentTab }: { currentTab: `${TabEnum}` }) => {
     //    }
     //  ]
     //  : []),
-    //...(userInfo?.team.canWrite
-    //  ? [
-    //    {
-    //      icon: 'support/outlink/apikeyLight',
-    //      label: t('user.apikey.key'),
-    //      id: TabEnum.apikey
-    //    }
-    //  ]
-    //  : []),
-    ...(userInfo?.username == 'root'
+    ...(userInfo?.team.canWrite
       ? [
           {
-            icon: 'support/usage/usageRecordLight',
-            label: t('user.Logs Manager'),
-            id: TabEnum.logs
+            icon: 'support/outlink/apikeyLight',
+            label: t('user.apikey.key'),
+            id: TabEnum.apikey
           }
         ]
       : []),
+
+    {
+      icon: 'support/usage/usageRecordLight',
+      label: t('user.Logs Manager'),
+      id: TabEnum.logs
+    },
     {
       icon: 'support/user/individuation',
       label: t('support.account.Individuation'),
