@@ -26,6 +26,7 @@ import {
   FlowNodeTypeEnum
 } from '@fastgpt/global/core/workflow/node/constant';
 import { FlowNodeOutputItemType } from '@fastgpt/global/core/workflow/type/io';
+import LDSwitch from '@/components/core/app/LogDetail';
 
 const NodeUserGuide = ({ data, selected }: NodeProps<FlowNodeItemType>) => {
   const theme = useTheme();
@@ -59,6 +60,9 @@ const NodeUserGuide = ({ data, selected }: NodeProps<FlowNodeItemType>) => {
           </Box>
           <Box mt={3} pt={3} borderTop={theme.borders.base}>
             <ScheduledTrigger data={data} />
+          </Box>
+          <Box mt={3} pt={3} borderTop={theme.borders.base}>
+            <LogDetail data={data} />
           </Box>
         </Box>
       </NodeCard>
@@ -163,6 +167,35 @@ function QuestionGuide({ data }: { data: FlowNodeItemType }) {
           type: 'updateInput',
           value: {
             ...inputs.find((item) => item.key === NodeInputKeyEnum.questionGuide),
+            value
+          }
+        });
+      }}
+    />
+  );
+}
+
+function LogDetail({ data }: { data: FlowNodeItemType }) {
+  const { inputs, nodeId } = data;
+  const onChangeNode = useContextSelector(WorkflowContext, (v) => v.onChangeNode);
+  const logDetail = useMemo(
+    () =>
+      (inputs.find((item) => item.key === NodeInputKeyEnum.logDetail)?.value as boolean) || false,
+    [inputs]
+  );
+
+  return (
+    <LDSwitch
+      isChecked={logDetail}
+      size={'md'}
+      onChange={(e) => {
+        const value = e.target.checked;
+        onChangeNode({
+          nodeId,
+          key: NodeInputKeyEnum.logDetail,
+          type: 'updateInput',
+          value: {
+            ...inputs.find((item) => item.key === NodeInputKeyEnum.logDetail),
             value
           }
         });

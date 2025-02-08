@@ -88,6 +88,7 @@ export type AppSimpleEditFormType = {
     };
     whisper: AppWhisperConfigType;
     scheduleTrigger: AppScheduledTriggerConfigType | null;
+    logDetail: boolean;
   };
 };
 

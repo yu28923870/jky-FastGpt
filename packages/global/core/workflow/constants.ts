@@ -45,6 +45,7 @@ export enum NodeInputKeyEnum {
   whisper = 'whisper',
   variables = 'variables',
   scheduleTrigger = 'scheduleTrigger',
+  logDetail = 'logDetail',
 
   // entry
   userChatInput = 'userChatInput',

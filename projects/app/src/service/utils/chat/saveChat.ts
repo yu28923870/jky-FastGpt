@@ -8,6 +8,8 @@ import { getChatTitleFromChatMessage } from '@fastgpt/global/core/chat/utils';
 import { mongoSessionRun } from '@fastgpt/service/common/mongo/sessionRun';
 import { StoreNodeItemType } from '@fastgpt/global/core/workflow/type';
 import { getGuideModule, splitGuideModule } from '@fastgpt/global/core/workflow/utils';
+import { MongoAppVersion } from '@fastgpt/service/core/app/versionSchema';
+import { NodeInputKeyEnum } from '@fastgpt/global/core/workflow/constants';
 
 type Props = {
   chatId: string;
@@ -54,16 +56,41 @@ export async function saveChat({
     const title = getChatTitleFromChatMessage(content[0]);
 
     await mongoSessionRun(async (session) => {
-      await MongoChatItem.insertMany(
-        content.map((item) => ({
-          chatId,
-          teamId,
-          tmbId,
-          appId,
-          ...item
-        })),
-        { session }
-      );
+      const appVersion = await MongoAppVersion.findOne({
+        appId
+      }).sort({
+        time: -1
+      });
+      let logDetailFlag = true;
+      // @ts-ignore
+      for (let i = 0; i < appVersion?.nodes[0].inputs.length; i++) {
+        if (appVersion?.nodes[0].inputs[i].key == NodeInputKeyEnum.logDetail) {
+          logDetailFlag = appVersion?.nodes[0].inputs[i].value;
+        }
+      }
+      if (logDetailFlag) {
+        await MongoChatItem.insertMany(
+          content.map((item) => ({
+            chatId,
+            teamId,
+            tmbId,
+            appId,
+            ...item
+          })),
+          { session }
+        );
+      } else {
+        await MongoChatItem.insertMany(
+          content.map((item) => ({
+            chatId,
+            teamId,
+            tmbId,
+            appId,
+            obj: item.obj
+          })),
+          { session }
+        );
+      }
 
       if (chat) {
         chat.title = title;

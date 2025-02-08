@@ -35,6 +35,7 @@ export const getDefaultAppForm = (): AppSimpleEditFormType => {
         type: 'web'
       },
       whisper: defaultWhisperConfig,
+      logDetail: true,
       scheduleTrigger: null
     }
   };
@@ -109,7 +110,8 @@ export const appWorkflow2Form = ({ nodes }: { nodes: StoreNodeItemType[] }) => {
         questionGuide,
         ttsConfig,
         whisperConfig,
-        scheduledTriggerConfig
+        scheduledTriggerConfig,
+        logDetailConfig
       } = splitGuideModule(getGuideModule(nodes));
 
       defaultAppForm.userGuide = {
@@ -118,7 +120,8 @@ export const appWorkflow2Form = ({ nodes }: { nodes: StoreNodeItemType[] }) => {
         questionGuide: questionGuide,
         tts: ttsConfig,
         whisper: whisperConfig,
-        scheduleTrigger: scheduledTriggerConfig
+        scheduleTrigger: scheduledTriggerConfig,
+        logDetail: logDetailConfig
       };
     } else if (node.flowNodeType === FlowNodeTypeEnum.pluginModule) {
       if (!node.pluginId) return;

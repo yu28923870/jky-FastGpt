@@ -65,13 +65,17 @@ export const splitGuideModule = (guideModules?: StoreNodeItemType) => {
     guideModules?.inputs?.find((item) => item.key === NodeInputKeyEnum.scheduleTrigger)?.value ??
     null;
 
+  const logDetailConfig: boolean =
+    !!guideModules?.inputs?.find((item) => item.key === NodeInputKeyEnum.logDetail)?.value || false;
+
   return {
     welcomeText,
     variableNodes,
     questionGuide,
     ttsConfig,
     whisperConfig,
-    scheduledTriggerConfig
+    scheduledTriggerConfig,
+    logDetailConfig
   };
 };
 export const replaceAppChatConfig = ({

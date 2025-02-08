@@ -8,10 +8,12 @@ import DateRangePicker, { DateRangeType } from '@fastgpt/web/components/common/D
 import { addDays } from 'date-fns';
 import type { GetAllChatLogsParams } from '@/global/core/api/appReq.d';
 import { exportExcel } from '@/service/utils/log/exportExcel';
+import { useUserStore } from '@/web/support/user/useUserStore';
 
 const LogsManage = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const { userInfo } = useUserStore();
   const [dateRange, setDateRange] = useState<DateRangeType>({
     from: addDays(new Date(), -7),
     to: new Date()
@@ -36,6 +38,7 @@ const LogsManage = () => {
             variant={'whitePrimary'}
             onClick={async () => {
               const params: GetAllChatLogsParams = {
+                teamId: String(userInfo?.team.teamId),
                 dateStart: dateRange.from || new Date(),
                 dateEnd: addDays(dateRange.to || new Date(), 1)
               };
